@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, Suspense } from "react";
 import SidebarFilters from "./components/SidebarFilters";
 import ProductGrid from "./components/ProductGrid";
 import { products as allProducts, Product } from "./data/products";
@@ -46,25 +46,27 @@ export default function HomePage() {
   };
 
   return (
-    <div className="flex flex-col md:flex-row gap-8 px-4 py-8 max-w-7xl mx-auto">
-      <div className="md:w-1/4 w-full mb-8 md:mb-0">
-        <SidebarFilters
-          selectedCategories={selectedCategories}
-          onCategoryChange={handleCategoryChange}
-          priceRange={priceRange}
-          onPriceChange={handlePriceChange}
-          minPrice={0}
-          maxPrice={1000}
-        />
+    <Suspense>
+      <div className="flex flex-col md:flex-row gap-8 px-4 py-8 max-w-7xl mx-auto">
+        <div className="md:w-1/4 w-full mb-8 md:mb-0">
+          <SidebarFilters
+            selectedCategories={selectedCategories}
+            onCategoryChange={handleCategoryChange}
+            priceRange={priceRange}
+            onPriceChange={handlePriceChange}
+            minPrice={0}
+            maxPrice={1000}
+          />
+        </div>
+        <div className="flex-1">
+          <h1 className="text-2xl font-bold mb-4">Product Listing</h1>
+          {filteredProducts.length === 0 ? (
+            <div className="text-center text-gray-500 py-16">No products found.</div>
+          ) : (
+            <ProductGrid products={filteredProducts} />
+          )}
+        </div>
       </div>
-      <div className="flex-1">
-        <h1 className="text-2xl font-bold mb-4">Product Listing</h1>
-        {filteredProducts.length === 0 ? (
-          <div className="text-center text-gray-500 py-16">No products found.</div>
-        ) : (
-          <ProductGrid products={filteredProducts} />
-        )}
-      </div>
-    </div>
+    </Suspense>
   );
 }
