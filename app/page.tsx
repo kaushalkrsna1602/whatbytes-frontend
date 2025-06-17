@@ -3,13 +3,15 @@ import React, { useState, useMemo } from "react";
 import SidebarFilters from "./components/SidebarFilters";
 import ProductGrid from "./components/ProductGrid";
 import { products as allProducts, Product } from "./data/products";
+import { useSearchParams } from "next/navigation";
 
 const allCategories = ["Electronics", "Clothing", "Home"];
 
 export default function HomePage() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000]);
-  const [search, setSearch] = useState("");
+  const searchParams = useSearchParams();
+  const search = searchParams.get("search") || "";
 
   // Filtering logic
   const filteredProducts = useMemo(() => {
@@ -56,15 +58,6 @@ export default function HomePage() {
         />
       </div>
       <div className="flex-1">
-        <div className="mb-6">
-          <input
-            type="text"
-            placeholder="Search for products..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="w-full rounded-md border px-4 py-2"
-          />
-        </div>
         <h1 className="text-2xl font-bold mb-4">Product Listing</h1>
         {filteredProducts.length === 0 ? (
           <div className="text-center text-gray-500 py-16">No products found.</div>
