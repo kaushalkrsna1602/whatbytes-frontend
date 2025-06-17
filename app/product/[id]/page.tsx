@@ -1,13 +1,15 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import { products } from "../../data/products";
 import { useCartStore } from "../../context/cartStore";
 import { Star } from "lucide-react";
-import { Inter } from "next/font/google";
-const inter = Inter({ subsets: ["latin"] });
 
-export default function ProductDetailPage({ params }: { params: { id: string } }) {
+interface ProductDetailPageProps {
+  params: { id: string };
+}
+
+export default function ProductDetailPage({ params }: ProductDetailPageProps) {
   const product = products.find((p) => p.id === params.id);
   const addToCart = useCartStore((state) => state.addToCart);
   const [quantity, setQuantity] = useState(1);
@@ -17,7 +19,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
   }
 
   return (
-    <div className={`${inter.className} antialiased bg-gray-50 min-h-screen flex flex-col`}>
+    <div className="min-h-screen flex flex-col bg-gray-50 antialiased">
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-12 py-12 px-4">
         {/* Image Section */}
         <div className="flex-1 flex items-center justify-center">
