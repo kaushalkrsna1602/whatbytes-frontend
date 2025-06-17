@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useMemo } from "react";
 import SidebarFilters from "./components/SidebarFilters";
 import ProductGrid from "./components/ProductGrid";
