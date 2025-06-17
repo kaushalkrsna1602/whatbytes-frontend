@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { useCartStore } from "../context/cartStore";
 import { X } from "lucide-react";
