@@ -1,8 +1,13 @@
 import React from "react";
 import { Star } from "lucide-react";
 import { useCartStore } from "../context/cartStore";
+import { Product } from "../data/products";
 
-export default function ProductCard({ product }) {
+type ProductCardProps = {
+  product: Product;
+};
+
+export default function ProductCard({ product }: ProductCardProps) {
   const addToCart = useCartStore((state) => state.addToCart);
   return (
     <div className="bg-white rounded-xl shadow p-4 flex flex-col items-center">

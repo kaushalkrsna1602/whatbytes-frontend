@@ -2,6 +2,15 @@ import React from "react";
 
 const categories = ["All", "Electronics", "Clothing", "Home"];
 
+type SidebarFiltersProps = {
+  selectedCategories: string[];
+  onCategoryChange: (category: string) => void;
+  priceRange: [number, number];
+  onPriceChange: (range: [number, number]) => void;
+  minPrice?: number;
+  maxPrice?: number;
+};
+
 export default function SidebarFilters({
   selectedCategories = [],
   onCategoryChange,
@@ -9,7 +18,7 @@ export default function SidebarFilters({
   onPriceChange,
   minPrice = 0,
   maxPrice = 1000,
-}) {
+}: SidebarFiltersProps) {
   return (
     <aside className="bg-blue-800 text-white rounded-xl p-6 w-full max-w-xs">
       <h2 className="text-xl font-semibold mb-6">Filters</h2>
