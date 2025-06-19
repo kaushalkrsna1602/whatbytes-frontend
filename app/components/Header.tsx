@@ -12,6 +12,7 @@ export default function Header() {
   );
   const [search, setSearch] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -21,6 +22,10 @@ export default function Header() {
           p.title.toLowerCase().includes(search.toLowerCase())
         ).slice(0, 5)
       : [];
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     if (search.trim().length > 0) {
@@ -96,7 +101,7 @@ export default function Header() {
       <div className="flex items-center gap-6">
         <Link href="/cart" className="relative flex items-center">
           <ShoppingCart size={24} />
-          {cartCount > 0 && (
+          {isMounted && cartCount > 0 && (
             <span className="absolute -top-2 -right-2 bg-red-500 text-xs rounded-full px-1.5">
               {cartCount}
             </span>

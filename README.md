@@ -13,6 +13,7 @@ A modern e-commerce frontend built with NExt.js and Tailwind Css, featuring prod
 - Responsive product listing with category and price filters
 - Search bar with live product recommendations
 - Product detail page with image, description, and add to cart
+- Persistant add to cart as local storage implemented
 - Cart page with quantity controls, remove, and price summary
 - Clean, accessible UI with high-contrast design
 - Built with Next.js App Router and Zustand for state management
