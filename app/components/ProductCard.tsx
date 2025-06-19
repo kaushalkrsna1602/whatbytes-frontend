@@ -4,6 +4,7 @@ import React from "react";
 import { Star } from "lucide-react";
 import { useCartStore } from "../context/cartStore";
 import { Product } from "../data/products";
+import { useRouter } from "next/navigation";
 
 type ProductCardProps = {
   product: Product;
@@ -11,8 +12,24 @@ type ProductCardProps = {
 
 export default function ProductCard({ product }: ProductCardProps) {
   const addToCart = useCartStore((state) => state.addToCart);
+  const router = useRouter();
+
+  const handleCardClick = (e: React.MouseEvent) => {
+    // Prevent navigation if Add to Cart button is clicked
+    if ((e.target as HTMLElement).closest("button[data-add-to-cart]") !== null) {
+      return;
+    }
+    router.push(`/product/${product.id}`);
+  };
+
   return (
-    <div className="bg-white/80 rounded-xl shadow-lg border border-gray-200 p-4 flex flex-col items-center backdrop-blur">
+    <div
+      className="bg-white/80 rounded-xl shadow-lg border border-gray-200 p-4 flex flex-col items-center backdrop-blur cursor-pointer transition hover:shadow-xl hover:border-blue-400 relative"
+      onClick={handleCardClick}
+      tabIndex={0}
+      role="button"
+      aria-label={`View details for ${product.title}`}
+    >
       <img
         src={product.image || "/placeholder.png"}
         alt={product.title}
@@ -35,8 +52,12 @@ export default function ProductCard({ product }: ProductCardProps) {
         </div>
       )}
       <button
-        className="mt-auto bg-blue-600 hover:bg-blue-700 text-white rounded-md px-4 py-2 w-full font-medium"
-        onClick={() => addToCart(product)}
+        data-add-to-cart
+        className="mt-auto bg-blue-600 hover:bg-blue-700 text-white rounded-md px-4 py-2 w-full font-medium z-10"
+        onClick={(e) => {
+          e.stopPropagation();
+          addToCart(product);
+        }}
       >
         Add to Cart
       </button>
