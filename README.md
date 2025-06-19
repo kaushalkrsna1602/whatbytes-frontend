@@ -4,7 +4,7 @@ A modern e-commerce frontend built with NExt.js and Tailwind Css, featuring prod
 
 ## 🚀 Live Demo
 
-[View the deployed app on Vercel](https://whatbytes-frontend-phi.vercel.app/)
+##View the deployed app on Vercel: [https://whatbytes-frontend-phi.vercel.app/](https://whatbytes-frontend-phi.vercel.app/)
 
 ---
 

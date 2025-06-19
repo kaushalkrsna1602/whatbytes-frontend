@@ -9,8 +9,9 @@ interface ProductDetailPageProps {
   params: Promise<{ id: string }>;
 }
 
+// Product Detail Page
+
 export default function ProductDetailPage({ params }: ProductDetailPageProps) {
-  // Next.js 15+ requires unwrapping params with React.use()
   const { id } = use(params);
   const product = products.find((p) => p.id === id);
   const addToCart = useCartStore((state) => state.addToCart);

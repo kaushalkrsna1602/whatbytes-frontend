@@ -4,6 +4,8 @@ import { useCartStore } from "../context/cartStore";
 import { X } from "lucide-react";
 import Link from "next/link";
 
+// Cart Page
+
 export default function CartPage() {
   const { items, updateQuantity, removeFromCart } = useCartStore((state) => ({
     items: state.items,
@@ -11,6 +13,7 @@ export default function CartPage() {
     removeFromCart: state.removeFromCart,
   }));
 
+  // Calculate total price
   const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   const handleIncrement = (id: string, current: number) => {
@@ -19,6 +22,8 @@ export default function CartPage() {
   const handleDecrement = (id: string, current: number) => {
     if (current > 1) updateQuantity(id, current - 1);
   };
+
+  // If cart is empty, show a message and a link to the home page
 
   if (items.length === 0) {
     return (

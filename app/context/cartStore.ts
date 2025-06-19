@@ -5,6 +5,8 @@ import { Product } from "../data/products";
 
 type CartItem = Product & { quantity: number };
 
+
+// Cart State
 type CartState = {
   items: CartItem[];
   addToCart: (product: Product, quantity?: number) => void;
@@ -13,6 +15,7 @@ type CartState = {
   clearCart: () => void;
 };
 
+// Cart Store
 export const useCartStore = create<CartState>((set) => ({
   items: [],
   addToCart: (product, quantity = 1) =>
